@@ -71,7 +71,9 @@ public class Anagram {
 
         if (c >= 'a' && c <= 'z') {
             result.append(c);
-        }
+        }else if (c == ' ') {
+    result.append(c);  
+}
        
     }
 
