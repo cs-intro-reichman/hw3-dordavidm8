@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /** Functions for checking if a given string is an anagram. */
 public class Anagram {
 	public static void main(String args[]) {
@@ -28,22 +30,69 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+
+	
+	String lower01 = preProcess(str1);
+	String lower02 = preProcess(str2);
+	if(lower01.length() != lower02.length()){
+	return false;
 	}
+
+	char[] arr2 = lower02.toCharArray();  
+
+	 for (int i = 0; i < lower01.length(); i++) {
+        char c = lower01.charAt(i);
+
+        int j = -1;
+        for (int k = 0; k < arr2.length; k++) {
+            if (arr2[k] == c) {
+                j = k;
+                break;
+            }
+        }
+		 if (j == -1) return false;
+
+        arr2[j] = '0';
+    }
+
+    return true;
+}
+		
+	
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
-	} 
+   		String lower = str.toLowerCase();
+   		StringBuilder result = new StringBuilder();
+		for (int i = 0; i < lower.length(); i++) {
+        char c = lower.charAt(i);
+
+        if (c >= 'a' && c <= 'z') {
+            result.append(c);
+        }
+       
+    }
+
+    return result.toString();
+}
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+	String lower = preProcess(str);
+	char[] arr = lower.toCharArray(); 
+	 Random rand = new Random();
+
+    for (int i = arr.length - 1; i > 0; i--) {
+        int j = rand.nextInt(i + 1);
+        char temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+	
+	
+	return new String(arr);
 	}
 }
