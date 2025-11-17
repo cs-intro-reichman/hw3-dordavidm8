@@ -92,7 +92,8 @@ public class Anagram {
         arr[j] = temp;
     }
 	
-	
+			System.out.println("   ");
+
 	return new String(arr);
 	}
 }
