@@ -45,23 +45,25 @@ public class LoanCalc {
 	// Given: the sum of the loan, the periodical interest rate (as a percentage),
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
-    public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
-        double payment = 0.01;     
-        double increment = 0.01;   
-        iterationCounter = 0;
+   public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
+    double payment = 0.01;     
+    double increment = 0.01;   
+    iterationCounter = 0;
 
-        while (true) {
+    double maxPayment = loan * (1 + rate / 100.0);
 
-            double balance = endBalance(loan, rate, n, payment);
-            iterationCounter++;
+    double balance = endBalance(loan, rate, n, payment);
 
-            if (Math.abs(balance) <= epsilon) {
-                return payment;
-            }
+    while (Math.abs(balance) > epsilon && payment <= maxPayment) {
 
-            payment += increment; 
-        }		
+        payment += increment;  // מגדילים את התשלום
+        balance = endBalance(loan, rate, n, payment);
+        iterationCounter++;
     }
+
+    return payment;
+}
+
     
     // Uses bisection search to compute an approximation of the periodical payment 
 	// that will bring the ending balance of a loan close to 0.
