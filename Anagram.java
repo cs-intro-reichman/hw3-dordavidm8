@@ -69,7 +69,7 @@ public class Anagram {
 		for (int i = 0; i < lower.length(); i++) {
         char c = lower.charAt(i);
 
-        if (c >= 'a' && c <= 'z') {
+        if ((c >= 'a' && c <= 'z') || c == ' ') {
             result.append(c);
         }
 }
