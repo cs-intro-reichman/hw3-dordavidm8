@@ -34,9 +34,12 @@ public class Anagram {
 	
 	String lower01 = preProcess(str1);
 	String lower02 = preProcess(str2);
-	if(lower01.length() != lower02.length()){
-	return false;
-	}
+	lower01 = lower01.replace(" ", "");
+    lower02 = lower02.replace(" ", "");
+
+    if (lower01.length() != lower02.length()) {
+        return false;
+    }
 
 	char[] arr2 = lower02.toCharArray();  
 
