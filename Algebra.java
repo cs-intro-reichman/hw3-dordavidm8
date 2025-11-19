@@ -25,43 +25,140 @@ public class Algebra {
 
 	// Returns x1 + x2
 	public static int plus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
-
+    if (x2 > 0) {
+        for (int i = 0; i < x2; i++) {
+            x1++;
+        }
+    } else {
+        for (int i = 0; i < -x2; i++) {
+            x1--;
+        }
+    }
+    return x1;
+}
 	// Returns x1 - x2
 	public static int minus(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
+    return plus(x1, neg(x2));
+}
+
 
 	// Returns x1 * x2
 	public static int times(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
+    int result = 0;
+
+    boolean negative = false;
+
+    if (x1 < 0) {
+        x1 = neg(x1);
+        negative = !negative;
+    }
+
+    if (x2 < 0) {
+        x2 = neg(x2);
+        negative = !negative;
+    }
+
+    for (int i = 0; i < x2; i++) {
+        result = plus(result, x1);
+    }
+
+    if (negative) {
+        result = neg(result);
+    }
+
+    return result;
+}
+
 
 	// Returns x^n (for n >= 0)
-	public static int pow(int x, int n) {
-		// Replace the following statement with your code
-		return 0;
-	}
+public static int pow(int x, int n) {
+    int y = 1;
+
+    boolean negative = false;
+    if (x < 0) {
+        x = neg(x);                
+        if (mod(n, 2) != 0) {
+            negative = true;
+        }
+    }
+
+    for (int j = 0; j < n; j++) {
+        y = times(y, x);
+    }
+
+    if (negative) {
+        y = neg(y);
+    }
+
+    return y;
+}
+
 
 	// Returns the integer part of x1 / x2 
 	public static int div(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
-	}
+    int quotient = 0;
+
+    boolean negative = false;
+
+    if (x1 < 0) {
+        x1 = neg(x1);
+        negative = !negative;
+    }
+
+    if (x2 < 0) {
+        x2 = neg(x2);
+        negative = !negative;
+    }
+
+    int remaining = x1;
+    while (remaining >= x2) {
+        remaining = minus(remaining, x2);
+        quotient++;
+    }
+
+    if (negative) {
+        quotient = neg(quotient);
+    }
+
+    return quotient;
+}
+
 
 	// Returns x1 % x2
 	public static int mod(int x1, int x2) {
-		// Replace the following statement with your code
-		return 0;
+	int count = 0;
+    int remaining = x1;
+    while (remaining >= x2) {
+        remaining = minus(remaining, x2);
+        count++;
+    }
+    return remaining;  
+		
 	}	
 
 	// Returns the integer part of sqrt(x) 
 	public static int sqrt(int x) {
-		// Replace the following statement with your code
-		return 0;
+int y = 0;
+    while (times(y, y) <= x) {  
+        y++;
+    }
+    return y - 1;		
 	}	  	  
+
+	public static int neg(int x) {
+    int result = 0;
+    if (x > 0) {
+        while (x > 0) {
+            x--;       
+            result--;  
+        }
+    } else if (x < 0) {
+        while (x < 0) {
+            x++;       
+            result++;  
+		}
+    }
+    return result;
+}
+
 }
